@@ -4,7 +4,7 @@
   "description": "Work at college",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/paulodaluz/DevMiddleware/issues"
   },
-  "homepage": "https://github.com/paulodaluz/DevMiddleware#readme"
+  "homepage": "https://github.com/paulodaluz/DevMiddleware#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
 }
