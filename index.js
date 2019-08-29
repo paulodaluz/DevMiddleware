@@ -1,10 +1,10 @@
+
 const express = require("express");
 const app = express();
-
-const port = 3333;
+const port = process.env.port || 3333;
 
 app.get("/", function(req, res) {
-  res.send("Hello World");
+   res.json(simpleMock);
 });
 
 app.listen(port, () => {

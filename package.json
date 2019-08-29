@@ -1,10 +1,10 @@
 {
   "name": "devmiddleware",
   "version": "1.0.0",
-  "description": "Work at college",
-  "main": "index.js",
+  "description": "Work to college",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon ./index.js"
+    "start": "nodemon ./server.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/paulodaluz/DevMiddleware#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "*",
+    "body-parser": "1.19.0",
+    "request": "2.88.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
