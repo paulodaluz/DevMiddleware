@@ -12,10 +12,6 @@ mongoose.Promise = global.Promise;
 var uri = 'mongodb+srv://user:pla123@iot-api-waapt.mongodb.net/test?retryWrites=true&w=majority'
 mongoose.connect(uri, { useNewUrlParser: true, socketTimeoutMS: 300000 } );
 
-//Maneira Local: MongoDb:
-/*mongoose.connect('mongodb://localhost:27017/node-crud-api', {
-    useMongoClient: true
-});*/
 
 //Configuração da variável app para usar o 'bodyParser()':
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -50,7 +46,8 @@ router.route('/produtos')
 /* 1) Método: Criar Produto (acessar em: POST http://localhost:8000/api/produtos)  */
 .post(function(req, res) {
     var produto = new Produto();
-
+    console.log('Req', req);
+    console.log('Res', res);
     //Aqui vamos setar os campos do produto (via request):
     produto.nome = req.body.nome;
     produto.preco = req.body.preco;
@@ -131,15 +128,20 @@ router.route('/coletores')
 /* 1) Método: Criar Produto (acessar em: POST http://localhost:8000/api/produtos)  */
 .post(function(req, res) {
     var coletor = new Coletor();
+    console.log(coletor.leitura);
+    let dados = {
+        produtoName: req.body.leitura[0].produtoName,
+        id: req.body.leitura[0].id,
+        preco: req.body.leitura[0].preco,
+        quantidade: req.body.leitura[0].quantidade,
+        unidade: req.body.leitura[0].unidade
+    }
+    
 
     //Aqui vamos setar os campos do produto (via request):
-    coletor.coletorNome = req.body.nome;
-    coletor.usuario = req.body.preco;
-    coletor.leitura.produtoName = re.body.leitura.produtoName; 
-    coletor.leitura.id = re.body.leitura.id;
-    coletor.leitura.preco = re.body.leitura.preco;
-    coletor.leitura.quantidade = re.body.leitura.quantidade;
-    coletor.leitura.unidade = re.body.leitura.unidade;
+    coletor.leitura.push(dados);
+    coletor.usuario = req.body.usuario;
+    coletor.coletorNome = req.body.coletorNome;
 
     coletor.save(function(error) {
         if(error)
@@ -181,15 +183,14 @@ router.route('/coletores/:coletor_id')
     Coletor.findById(req.params.coletor_id, function(error, coletor) {
         if (error) 
             res.send("Id do Coletor não encontrado....: " + error);
-
             //Segundo: 
-            coletor.coletorNome = req.body.nome;
-            coletor.usuario = req.body.preco;
-            coletor.leitura.produtoName = re.body.leitura.produtoName; 
-            coletor.leitura.id = re.body.leitura.id;
-            coletor.leitura.preco = re.body.leitura.preco;
-            coletor.leitura.quantidade = re.body.leitura.quantidade;
-            coletor.leitura.unidade = re.body.leitura.unidade;
+            coletor.coletorNome = req.body.coletorNome;
+            coletor.usuario = req.body.usuario;
+            coletor.leitura.produtoName = req.body.leitura.produtoName; 
+            coletor.leitura.id = req.body.leitura.id;
+            coletor.leitura.preco = req.body.leitura.preco;
+            coletor.leitura.quantidade = req.body.leitura.quantidade;
+            coletor.leitura.unidade = req.body.leitura.unidade;
 
             //Terceiro: Agora que já atualizamos os dados, vamos salvar as propriedades:
             coletor.save(function(error) {
