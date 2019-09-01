@@ -3,21 +3,24 @@ const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 
 const routeTest = require("./src/routes/routeTest");
-const routesProdutos = require("./src/routes/routesUsers");
-const routesColetores = require("./src/routes/routesProdutos");
+const routesProdutos = require("./src/routes/routesProdutos");
+const routesColetores = require("./src/routes/routesColetores");
+
+var port = process.env.port || 3333;
 
 const app = express();
 
-const port = 3333;
-
-app.use("/", routeTest);
-app.use("/api", routesProdutos, routesColetores);
+mongoose.Promise = global.Promise;
+var uri =
+  "mongodb+srv://user:pla123@iot-api-waapt.mongodb.net/test?retryWrites=true&w=majority";
+mongoose.connect(uri, { useNewUrlParser: true, socketTimeoutMS: 300000 });
 
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-mongoose.connect("mongodb://localhost:27017/MarketData", {
-  useNewUrlParser: true
-});
+/* app.use("/", routeTest); */
+app.use("/api", routesProdutos, routesColetores);
 
 app.listen(port, () => {
   console.log(`O servidor está rodando na porta ${port}`);
