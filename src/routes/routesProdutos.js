@@ -23,7 +23,12 @@ routes.post(
     check("descricao")
       .not()
       .isEmpty()
-      .isString()
+      .isString(),
+
+    check("idDispositivo")
+      .not()
+      .isEmpty()
+      .isNumeric()
   ],
   controller.cadastrarProduto
 );
@@ -46,7 +51,12 @@ routes.put(
     check("descricao")
       .not()
       .isEmpty()
-      .isString()
+      .isString(),
+
+    check("idDispositivo")
+      .not()
+      .isEmpty()
+      .isNumeric()
   ],
   controller.alterarProduto
 );

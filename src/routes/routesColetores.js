@@ -6,7 +6,7 @@ const controllerColetor = require("../controller/controllerColetores");
 const routes = express.Router();
 
 /* 1) Método: Criar Coletor (acessar em: POST http://localhost:3333/api/coletores/cadastrarColetor)  */
-routes.post("/coletores/cadastrarColetor", controllerColetor.deletarColetor);
+routes.post("/coletores/cadastrarColetor", controllerColetor.cadastrarColetor);
 
 /* 2) Método: Selecionar Todos os Coletores (acessar em: GET http://localhost:3333/api/coletores/listarColetores)  */
 routes.get("/coletores/listarColetores", controllerColetor.listarColetores);

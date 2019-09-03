@@ -11,8 +11,7 @@ module.exports = {
     }
 
     var produto = new Produto();
-    console.log("Req", req);
-    console.log("Res", res);
+
     //Aqui vamos setar os campos do produto (via request):
     produto.nome = req.body.nome;
     produto.preco = req.body.preco;
