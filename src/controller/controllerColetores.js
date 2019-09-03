@@ -2,7 +2,6 @@ const { validationResult } = require("express-validator");
 var Coletor = require("../models/coletorSchema");
 
 module.exports = {
-  //Rota de Teste para sabermos se tudo está realmente funcionando (acessar através: GET: http://localhost:8000/api):
   async cadastrarColetor(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -19,10 +18,10 @@ module.exports = {
       unidade: req.body.leitura[0].unidade
     };
 
-    //Aqui vamos setar os campos do produto (via request):
     coletor.leitura.push(dados);
     coletor.usuario = req.body.usuario;
     coletor.coletorNome = req.body.coletorNome;
+    coletor.idDispositivo = req.headers.idDispositivo;
 
     coletor.save(function(error) {
       if (error) res.send("Erro ao tentar cadastrar o Coletor....: " + error);
@@ -41,6 +40,7 @@ module.exports = {
     Coletor.findById(req.params.coletor_id, function(error, coletor) {
       if (error) res.send("Id do Coletor não encontrado....: " + error);
       //Segundo:
+      coletor.idDispositivo = req.headers.idDispositivo;
       coletor.coletorNome = req.body.coletorNome;
       coletor.usuario = req.body.usuario;
       coletor.leitura.produtoName = req.body.leitura.produtoName;

@@ -13,6 +13,7 @@ module.exports = {
     var produto = new Produto();
 
     //Aqui vamos setar os campos do produto (via request):
+    produto.idDispositivo = req.headers.idDispositivo;
     produto.nome = req.body.nome;
     produto.preco = req.body.preco;
     produto.descricao = req.body.descricao;
@@ -35,11 +36,11 @@ module.exports = {
       if (error) res.send("Id do Produto não encontrado....: " + error);
 
       //Segundo:
+      produto.idDispositivo = req.headers.idDispositivo;
       produto.nome = req.body.nome;
       produto.preco = req.body.preco;
       produto.descricao = req.body.descricao;
 
-      //Terceiro: Agora que já atualizamos os dados, vamos salvar as propriedades:
       produto.save(function(error) {
         if (error) res.send("Erro ao atualizar o produto....: " + error);
 
