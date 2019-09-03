@@ -1,8 +1,14 @@
+const { validationResult } = require("express-validator");
 var Coletor = require("../models/coletorSchema");
 
 module.exports = {
   //Rota de Teste para sabermos se tudo está realmente funcionando (acessar através: GET: http://localhost:8000/api):
   async cadastrarColetor(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(412).json({ errors: errors.array() });
+    }
+
     var coletor = new Coletor();
     console.log(coletor.leitura);
     let dados = {
@@ -26,6 +32,11 @@ module.exports = {
   },
 
   async alterarColetor(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(412).json({ errors: errors.array() });
+    }
+
     //Primeiro: para atualizarmos, precisamos primeiro achar 'Id' do 'Produto':
     Coletor.findById(req.params.coletor_id, function(error, coletor) {
       if (error) res.send("Id do Coletor não encontrado....: " + error);

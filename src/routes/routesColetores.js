@@ -1,8 +1,7 @@
 const express = require("express");
+const { check } = require("express-validator");
 
 const controllerColetor = require("../controller/controllerColetores");
-
-const validacao = require("../validators/coletoresValidators");
 
 const routes = express.Router();
 

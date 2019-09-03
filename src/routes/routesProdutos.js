@@ -1,22 +1,53 @@
 const express = require("express");
+const { check } = require("express-validator");
 
 const controller = require("../controller/controllerProdutos");
-
-const validacao = require("../validators/coletoresValidators");
 
 const routes = express.Router();
 
 /* 1) Método: Criar Produto (acessar em: POST http://localhost:3333/api/produtos/cadastrarProduto)  */
 routes.post(
   "/produtos/cadastrarProduto",
-  /* validacao.cadastrarProduto, */
+  [
+    check("nome")
+      .not()
+      .isEmpty()
+      .isString()
+      .isLength({ min: 2 }),
+
+    check("preco")
+      .not()
+      .isEmpty()
+      .isNumeric(),
+
+    check("descricao")
+      .not()
+      .isEmpty()
+      .isString()
+  ],
   controller.cadastrarProduto
 );
 
 /* 4) Método: Atualizar por Id: (acessar em: PUT http://localhost:3333/api/produtos/alterarProduto/:produto_id) */
 routes.put(
   "/produtos/alterarProduto/:produto_id",
-  /* validacao.alterarProduto, */
+  [
+    check("nome")
+      .not()
+      .isEmpty()
+      .isString()
+      .isLength({ min: 2 }),
+
+    check("preco")
+      .not()
+      .isEmpty()
+      .isNumeric(),
+
+    check("descricao")
+      .not()
+      .isEmpty()
+      .isString()
+  ],
   controller.alterarProduto
 );
 
