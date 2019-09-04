@@ -21,7 +21,7 @@ module.exports = {
     coletor.leitura.push(dados);
     coletor.usuario = req.body.usuario;
     coletor.coletorNome = req.body.coletorNome;
-    coletor.idDispositivo = req.headers.idDispositivo;
+    coletor.idDispositivo = req.headers.iddispositivo;
 
     coletor.save(function(error) {
       if (error) res.send("Erro ao tentar cadastrar o Coletor....: " + error);
@@ -40,7 +40,7 @@ module.exports = {
     Coletor.findById(req.params.coletor_id, function(error, coletor) {
       if (error) res.send("Id do Coletor não encontrado....: " + error);
       //Segundo:
-      coletor.idDispositivo = req.headers.idDispositivo;
+      coletor.idDispositivo = req.headers.iddispositivo;
       coletor.coletorNome = req.body.coletorNome;
       coletor.usuario = req.body.usuario;
       coletor.leitura.produtoName = req.body.leitura.produtoName;

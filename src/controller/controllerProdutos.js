@@ -11,9 +11,8 @@ module.exports = {
     }
 
     var produto = new Produto();
-
     //Aqui vamos setar os campos do produto (via request):
-    produto.idDispositivo = req.headers.idDispositivo;
+    produto.idDispositivo = req.headers.iddispositivo;
     produto.nome = req.body.nome;
     produto.preco = req.body.preco;
     produto.descricao = req.body.descricao;
@@ -36,7 +35,7 @@ module.exports = {
       if (error) res.send("Id do Produto não encontrado....: " + error);
 
       //Segundo:
-      produto.idDispositivo = req.headers.idDispositivo;
+      produto.idDispositivo = req.headers.iddispositivo;
       produto.nome = req.body.nome;
       produto.preco = req.body.preco;
       produto.descricao = req.body.descricao;
